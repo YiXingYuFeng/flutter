@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home.dart';
-import 'package:flutter_application_1/list_view.dart';
-import 'package:flutter_application_1/login_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,10 +11,6 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Home',
       home: HomePage(),
-      routes: {
-        '/login': (context) => const LoginPage(context),
-        '/list': (context) => const ListPage(),
-      },
     );
   }
 }

@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    # 屏幕适配
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:
