@@ -8,8 +8,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // logo
+
+  // 登录表单
+
+  // 第三方登录
+
+  // 注册按钮
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
