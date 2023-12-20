@@ -2,19 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home.dart';
+import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // 设备适配初始化
     ScreenUtil.init(context, designSize: Size(375, 670));
-    return const MaterialApp(
+    print(staticRoutes);
+    // 项目主体
+    return MaterialApp(
       title: 'Home',
-      routes: staticRouter,
-      home: HomePage(),
+      routes: staticRoutes,
+      home: LoginPage(),
     );
   }
 }
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
 void main() {
   runZonedGuarded(() async {
     // await ScreenUtil.ensureScreenSize();
-    runApp(const MyApp());
+    runApp(MyApp());
   }, (error, stackTrace) {
     // 异常处理函数
     print('Caught an error: $error');

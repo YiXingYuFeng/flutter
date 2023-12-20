@@ -6,7 +6,8 @@ import 'package:flutter_application_1/values/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage(context, {super.key});
+  const HomePage({Key? key}) : super(key: key);
+  // const HomePage(context, {super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
