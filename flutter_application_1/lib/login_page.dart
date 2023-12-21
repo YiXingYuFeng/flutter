@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/screen.dart';
 import 'package:flutter_application_1/values/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -75,6 +76,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // 用户名
+  final TextEditingController _unameController = TextEditingController();
+  // 密码
+  final TextEditingController _passWordController = TextEditingController();
+
+  // 执行登录操作
+  _handleLogin() async {
+    print(_unameController.value.text);
+    print(_passWordController.value);
+    Fluttertoast.showToast(
+        msg: "This is Center Short Toast",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
   // 登录表单
   Widget _buildFrom() {
     return Container(
@@ -90,6 +110,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             child: TextField(
+              controller: _unameController,
+              // 输入框 默认键盘输入类型
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -103,13 +125,15 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: duSetFontSize(18),
               ),
               maxLines: 1,
+              autocorrect: false, // 自动纠正
+              obscureText: false, // 是否隐藏输入内容
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
               border: Border.all(
-                color: const Color.fromARGB(51, 246, 246, 246),
+                color: AppColor.secondaryElement,
                 width: 2,
               ),
             ),
@@ -132,13 +156,13 @@ class _LoginPageState extends State<LoginPage> {
           // 登录按钮
           Container(
             width: duSetWidth(295),
-            height: duSetHeight(44),
-            margin: EdgeInsets.only(top: 10),
+            height: duSetHeight(34),
+            margin: EdgeInsets.only(top: 80),
             decoration: BoxDecoration(
               color: AppColor.secondaryElementText,
+              borderRadius: BorderRadius.circular(30),
             ),
             child: ElevatedButton(
-              onPressed: () {},
               style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all(AppColor.secondaryElementText),
@@ -152,16 +176,13 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: duSetFontSize(16),
                 ),
               ),
+              onPressed: _handleLogin,
             ),
           )
         ],
       ),
     );
   }
-
-  // 第三方登录
-
-  // 注册按钮
 
   @override
   Widget build(BuildContext context) {

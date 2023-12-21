@@ -11,6 +11,12 @@ dependencies:
     sdk: flutter
     # 屏幕适配
   flutter_screenutil: ^5.8.4
+    # 提示 toast
+  fluttertoast: ^8.2.4
+   # 通讯
+  dio: ^5.4.0 
+  cookie_jar: ^4.0.8
+  dio_cookie_manager: ^3.1.1
 
 dev_dependencies:
   flutter_test:
