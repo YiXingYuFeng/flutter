@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: () {
           print('点击');
-          Navigator.pushNamed(context, '/login');
+          Navigator.pushNamed(context, '/image');
 
           ///  如果没有登录则跳转至登录页
         },
