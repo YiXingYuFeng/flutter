@@ -1,4 +1,9 @@
+import 'dart:ffi';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/global.dart';
+// import 'package:flutter_application_1/utils/http.dart';
 import 'package:flutter_application_1/utils/screen.dart';
 import 'package:flutter_application_1/values/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -81,18 +86,60 @@ class _LoginPageState extends State<LoginPage> {
   // 密码
   final TextEditingController _passWordController = TextEditingController();
 
+  final dio = Dio();
+  // 登录操作
+  _login(String userName, String password) async {
+    try {
+      /// 判断当前设备是否为 IOS
+      var info = await Global.getDeviceInfo();
+      print('当前设备标识${info.identifierForVendor}');
+      final formData = FormData.fromMap({
+        'username': userName,
+        'password': password,
+        'phoneCode': info.identifierForVendor
+      });
+      final response = await dio.post(
+          'https://sjzc-bs-dev.parramountain.com/bs-auth-api/auth/login',
+          data: formData);
+      final responseData = response.data;
+      final username = responseData['data']['username'];
+      final userId = responseData['data']['userId'];
+      print(username);
+      print(userId);
+      Navigator.pushNamed(context, '/home');
+    } catch (e) {
+      print('登录发生错误$e');
+    }
+  }
+
   // 执行登录操作
   _handleLogin() async {
-    print(_unameController.value.text);
-    print(_passWordController.value);
-    Fluttertoast.showToast(
-        msg: "This is Center Short Toast",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.TOP,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+    String userName = _unameController.text;
+    String password = _passWordController.text;
+    if (userName.isEmpty) {
+      Fluttertoast.showToast(
+          msg: "请输入用户账号",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      return;
+    }
+    if (password.isEmpty) {
+      Fluttertoast.showToast(
+          msg: "请输入账号密码",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      return;
+    }
+
+    _login(userName, password);
   }
 
   // 登录表单
@@ -138,6 +185,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             child: TextField(
+              controller: _passWordController,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -151,6 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: duSetFontSize(18),
               ),
               maxLines: 1,
+              obscureText: true,
             ),
           ),
           // 登录按钮
