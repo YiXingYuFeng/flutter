@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/home.dart';
-import 'package:flutter_application_1/login_page.dart';
-import 'package:flutter_application_1/pages/picture.dart';
+// import 'package:flutter_application_1/home.dart';
+// import 'package:flutter_application_1/login_page.dart';
+// import 'package:flutter_application_1/pages/picture.dart';
+import 'package:flutter_application_1/pages/video_player.dart';
 import 'package:flutter_application_1/router.dart';
-import 'package:flutter_application_1/utils/global.dart';
+// import 'package:flutter_application_1/utils/global.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Home',
       routes: staticRoutes,
-      home: ImagePage(),
+      home: VideoPlayerPage(),
     );
   }
 }

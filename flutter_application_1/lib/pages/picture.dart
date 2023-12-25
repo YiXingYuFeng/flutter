@@ -47,6 +47,18 @@ class _ImagePageState extends State<ImagePage> {
     }
   }
 
+  // 视屏
+  Future _pickVideo(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickVideo(source: source); //
+      if (image == null) return;
+      final imaegeTemporary = File(image.path);
+      setState(() => this.image = imaegeTemporary);
+    } on PlatformException catch (e) {
+      print('Failed to pick image:$e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +77,14 @@ class _ImagePageState extends State<ImagePage> {
               : FlutterLogo(
                   size: 160,
                 ),
+          Container(
+            padding:
+                EdgeInsets.only(top: duSetHeight(20), bottom: duSetHeight(20)),
+            child: Text(
+              'Image Picker',
+              style: TextStyle(fontSize: 24),
+            ),
+          ),
           _buildButton(
             title: 'picker Gallery',
             icon: Icons.image_outlined,
@@ -74,9 +94,17 @@ class _ImagePageState extends State<ImagePage> {
             height: 24,
           ),
           _buildButton(
-            title: 'picker Gamera',
+            title: 'picker Camera',
             icon: Icons.camera_alt_outlined,
             onClicked: () => _pickImage(ImageSource.camera),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          _buildButton(
+            title: 'picker Video',
+            icon: Icons.camera_alt_outlined,
+            onClicked: () => _pickVideo(ImageSource.camera),
           ),
         ]),
       ),
